@@ -3,29 +3,26 @@ import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MySphereApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MySphereApp extends StatelessWidget {
+  const MySphereApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MySphere',
       debugShowCheckedModeBanner: false,
+      title: 'MySphere',
       theme: ThemeData(
+        colorSchemeSeed: Colors.indigo,
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2F5D89)),
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
       ),
-      home: const LoginScreen(),
+      initialRoute: '/login',
       routes: {
-        '/signup': (context) => const SignUpScreen(),
-        // '/home': (context) => const HomeScreen(), // (ileride ekleriz)
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => SignUpScreen(),
       },
     );
-    }
+  }
 }
