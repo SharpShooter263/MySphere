@@ -9,7 +9,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'MySphere',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blue,
+      ),
       home: const HomePage(),
     );
   }
@@ -20,9 +23,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: AppBar(title: Text('MySphere')),
-      body: Center(child: Text('Hello from MySphere!')),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('MySphere'),
+      ),
+      body: const Center(
+        child: Text('Hello from MySphere!'),
+      ),
     );
   }
 }
