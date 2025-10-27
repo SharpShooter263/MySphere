@@ -5,6 +5,11 @@ workflows:
     environment:
       flutter: stable
     scripts:
+      - name: Prepare Android directory if missing
+        script: |
+          if [ ! -d "android" ]; then
+            flutter create .
+          fi
       - name: Get Flutter packages
         script: |
           flutter pub get
