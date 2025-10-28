@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mysphere">
 
-    <!-- İnternet izni -->
+    <!-- İnternet izni (önerilir) -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -9,7 +9,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <!-- Flutter V2 embedding bayrağı -->
+        <!-- Flutter V2 embedding bayrağı (V1 hatasını engeller) -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
@@ -33,6 +33,13 @@
             </intent-filter>
         </activity>
 
-        <!-- Firebase varsayılan bildirim simgesi ve rengi -->
+        <!-- Firebase varsayılan bildirim ikon/rengi -->
         <meta-data
-            android:name
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/launch_background"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@android:color/white"/>
+    </application>
+
+</manifest>
