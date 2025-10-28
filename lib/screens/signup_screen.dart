@@ -1,93 +1,99 @@
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailCtrl = TextEditingController();
-  final _passCtrl = TextEditingController();
-  final _pass2Ctrl = TextEditingController();
-  bool _obscure = true;
-
-  void _submit() {
-    if (!_formKey.currentState!.validate()) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Kayıt başarıyla oluşturuldu!')),
-    );
-    Navigator.pop(context);
-  }
+class _SignupScreenState extends State<SignupScreen> {
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Kayıt Ol')),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
+      backgroundColor: Colors.grey[100],
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                'Hesap Oluştur',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _emailCtrl,
-                decoration: const InputDecoration(
-                  labelText: 'E-posta',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (v) =>
-                    v != null && v.contains('@') ? null : 'Geçerli e-posta girin',
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _passCtrl,
-                obscureText: _obscure,
+              // Ad Soyad
+              TextField(
+                textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(
-                  labelText: 'Şifre',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off),
-                    onPressed: () => setState(() => _obscure = !_obscure),
+                  prefixIcon: const Icon(Icons.person_outline),
+                  hintText: 'Ad Soyad',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                validator: (v) =>
-                    v != null && v.length >= 6 ? null : 'En az 6 karakter olmalı',
               ),
+
               const SizedBox(height: 16),
-              TextFormField(
-                controller: _pass2Ctrl,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Şifre (Tekrar)',
-                  border: OutlineInputBorder(),
+
+              // E-posta
+              TextField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.email_outlined),
+                  hintText: 'E-posta',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-                validator: (v) =>
-                    v == _passCtrl.text ? null : 'Şifreler eşleşmiyor',
               ),
-              const SizedBox(height: 20),
+
+              const SizedBox(height: 16),
+
+              // Şifre
+              TextField(
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.lock_outline),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() => _obscurePassword = !_obscurePassword);
+                    },
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                    ),
+                  ),
+                  hintText: 'Şifre',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // Kayıt ol butonu
               ElevatedButton(
-                onPressed: _submit,
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Kayıt denendi (demo)')),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: Colors.indigo,
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
-                child: const Text('Kayıt Ol'),
+                child: const Text('Kayıt Ol', style: TextStyle(fontSize: 16)),
               ),
+
+              const SizedBox(height: 12),
+
+              // Geri dön (Login)
               TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Giriş sayfasına dön'),
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Zaten hesabın var mı? Giriş yap'),
               ),
             ],
           ),
