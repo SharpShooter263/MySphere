@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,47 +9,79 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _obscure = true;
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('MySphere')),
+      backgroundColor: Colors.grey[100],
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
               'Giriş Yap',
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 32),
             TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'E-posta',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email_outlined),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.email_outlined),
+                hintText: 'E-posta',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: _passwordController,
-              obscureText: _obscure,
+              obscureText: _obscurePassword,
               decoration: InputDecoration(
-                labelText: 'Şifre',
-                border: const OutlineInputBorder(),
                 prefixIcon: const Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
-                  icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off),
-                  onPressed: () => setState(() => _obscure = !_obscure),
+                  icon: Icon(
+                    _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
+                  },
+                ),
+                hintText: 'Şifre',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {},
-              style: ElevatedButton
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                backgroundColor: Colors.blue[800],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              child: const Text('Giriş Yap', style: TextStyle(fontSize: 16)),
+            ),
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignupScreen()),
+                );
+              },
+              child: const Text('Hesabın yok mu? Kayıt ol'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
