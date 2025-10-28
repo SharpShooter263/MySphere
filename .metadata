@@ -1,0 +1,5 @@
+version:
+  revision: "1f6b4a3f5a2f"
+  channel: "stable"
+
+project_type: app
