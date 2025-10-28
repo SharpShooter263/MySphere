@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "646881485719",
+    "project_id": "mysphere-f0bb5",
+    "storage_bucket": "mysphere-f0bb5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646881485719:android:21ebf3ae31c141c6ee9ad2",
+        "android_client_info": {
+          "package_name": "com.example.mysphere"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAML5x7dprzkyWheIMxT2AGe3kCcdI7dN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
