@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
-    id 'com.google.gms.google-services' // Firebase için gerekli
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -13,18 +14,16 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
-
         multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            debuggable true
+            // Firebase ile sorun çıkarmaz; varsayılan bırakıyoruz
         }
     }
 
@@ -32,23 +31,25 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
 dependencies {
-    // Flutter bağımlılıkları
-    implementation 'androidx.multidex:multidex:2.0.1'
+    // Firebase BOM ile sürümleri senkron tut
+    implementation platform('com.google.firebase:firebase-bom:32.7.4')
 
-    // Firebase temel modülleri
-    implementation 'com.google.firebase:firebase-bom:33.3.0'
-    implementation 'com.google.firebase:firebase-analytics'
+    // İhtiyaç duyduklarımız
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-analytics'
 
-    // Gereken ek Android destek kütüphaneleri
+    // AndroidX
     implementation 'androidx.core:core-ktx:1.13.1'
-    implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'com.google.android.material:material:1.12.0'
 }
