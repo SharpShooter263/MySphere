@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SignupScreen()),
+                  MaterialPageRoute(builder: (context) => SignupScreen()),
                 );
               },
               child: const Text('Hesabın yok mu? Kayıt ol'),
