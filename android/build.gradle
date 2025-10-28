@@ -4,7 +4,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        // Android Gradle Plugin
         classpath 'com.android.tools.build:gradle:8.2.1'
+        // Kotlin Gradle Plugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
+        // Google services (Firebase)
         classpath 'com.google.gms:google-services:4.4.2'
     }
 }
@@ -20,7 +24,6 @@ rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
-
 subprojects {
     project.evaluationDependsOn(':app')
 }
